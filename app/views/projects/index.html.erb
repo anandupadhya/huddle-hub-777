@@ -1,8 +1,26 @@
 <h1>Huddle Hub</h1>
 
-<p><%= @projects.length %></p>
+<ul class="pb-3 flex items-center justify-center space-x-6 shadow-sm">
+  <button>Graphics & Design</button>
+  <button>Digital Marketing</button>
+  <button>Music & Audio</button>
+  <button>Programming & Tech</button>
+</ul>
+<div class="flex justify-between max-w-max gap-y-10 flex-wrap">
+  <% @projects.each do |project| %>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+      <div class="px-6 py-4">
+        <div class="Project justify-center pb-3 font-bold"><%= project.name %></div>
+        <p class="text-gray-700 text-base">
+          <%= project.description %>
+        </p>
+      </div>
+      <div class="px-6 pt-4 pb-2">
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= project.status %></span>
+          <ul class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+          <button>Join</button>
+      </div>
+    </div>
+  <% end %>
 
-<% @projects.each do |project|  %>
-  <h2><%= project.name %></h2>
-  <h3><%= project.user.first_name %></h3>
-<% end %>
+</div>
