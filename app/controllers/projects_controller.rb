@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   def index
     @projects = Project.all
-    @categories = Category.all
+    # @categories = Category.all
     if params[:category]
       p category = params[:category].to_i
       p @projects = @projects.select { |project| project.category_id == category }

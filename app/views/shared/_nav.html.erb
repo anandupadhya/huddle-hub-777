@@ -1,0 +1,25 @@
+<div class="nav container-none flex-col p-4 shadow">
+  <div class="nav-main flex justify-between">
+    <div class="brand">
+      <h1>Huddle Hub</h1>
+    </div>
+
+    <div class="session container-none flex">
+      <% if user_signed_in? %>
+        <%= link_to 'New Project', new_project_path %>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: { confirm: "You really want to sign out?" } %>
+        <p><%= current_user.username %></p>
+      <% else %>
+        <p><%= link_to 'Sign In', new_user_session_path %></p>
+        <p><%= link_to 'Sign Up', new_user_registration_path %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container-none flex justify-between">
+  <%= link_to 'All', projects_path %>
+    <% Category.all.each do |category| %>
+      <%= link_to category.name, projects_path(category: category.id) %>
+    <% end %>
+  </div>
+</div>
