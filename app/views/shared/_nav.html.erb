@@ -1,25 +1,46 @@
-<div class="nav container-none flex-col p-4 shadow">
-  <div class="nav-main flex justify-between">
-    <div class="brand">
-      <h1>Huddle Hub</h1>
+<nav class="navbar shadow-xl">
+  <div class="max-w-full mx-auto px-8 pt-4 pb-2">
+    <div class="flex justify-between">
+
+      <div class="flex space-x-4">
+        <!-- logo -->
+        <div>
+          <a href="#" class="flex items-center py-4 hover:text-gray-900">
+            <i class="fab fa-hubspot text-5xl text-yellow-300"></i>
+            <span class="logo-text font-bold text-5xl pl-4">HuddleHub</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- secondary nav -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="" class="nav-link text-lg hover:text-yellow-300 py-5 px-3">Login</a>
+        <a href="" class="text-lg py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Signup</a>
+      </div>
+
+      <!-- mobile button goes here -->
+      <div class="md:hidden flex items-center">
+        <button class="mobile-menu-button">
+          <i class="fas fa-bars text-3xl text-yellow-300"></i>
+        </button>
+      </div>
+
     </div>
 
-    <div class="session container-none flex">
-      <% if user_signed_in? %>
-        <%= link_to 'New Project', new_project_path %>
-        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: { confirm: "You really want to sign out?" } %>
-        <p><%= current_user.username %></p>
-      <% else %>
-        <p><%= link_to 'Sign In', new_user_session_path %></p>
-        <p><%= link_to 'Sign Up', new_user_registration_path %></p>
+    <!--     category nav -->
+    <div class="hidden max-w-full mx-auto md:flex md:flex-wrap md:justify-center">
+      <%= link_to 'All', projects_path, class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300"%>
+      <% Category.all.each do |category| %>
+        <%= link_to category.name, projects_path(category: category.id), class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300" %>
       <% end %>
     </div>
   </div>
 
-  <div class="container-none flex justify-between">
-  <%= link_to 'All', projects_path %>
+  <!-- mobile menu -->
+  <div class="mobile-menu md:hidden pb-2">
+    <%= link_to 'All', projects_path, class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200" %>
     <% Category.all.each do |category| %>
-      <%= link_to category.name, projects_path(category: category.id) %>
+      <%= link_to category.name, projects_path(category: category.id), class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200" %>
     <% end %>
   </div>
-</div>
+</nav>
