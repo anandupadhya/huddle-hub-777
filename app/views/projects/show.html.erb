@@ -1,21 +1,44 @@
-<h1><%= @project.name %></h1>
+<div class="container px-0 w-auto mt-2">
+  <div class="container flex">
+    <div class= "container bg-pink-100 border-2 border-black shadow-xl rounded-md">
 
-<h3>Owner</h3>
-<p><%= @project.user.first_name %> <%= @project.user.last_name %></p>
+      <h1 class="px-2 border-2 border-black my-2 rounded-xl"><%= @project.name %></h1>
+      <div class="px-2 border-2 border-black my-2 rounded-xl">
+        <h3>Description</h3>
+        <p><%= @project.description %></p>
+      </div>
+      <div class="px-2 border-2 border-black my-2 rounded-xl">
+        <h3>Details</h3>
+        <p><%= @project.details %></p>
+      </div>
+      <div class="px-2 border-2 border-black my-2 rounded-xl">
+        <h3>Status</h3>
+        <p><%= @project.status %></p>
+      </div>
+      <div class="px-2 border-2 border-black my-2 rounded-xl">
+        <h3>Project Updates</h3>
+        <p><%= @project.project_updates.count %></p>
+      </div>
+    </div>
 
-<h3>Description</h3>
-<p><%= @project.description %></p>
+    <div class= "container bg-blue-200 border-2 border-black shadow-xl rounded-md">
+      <div class="px-2 border-2 border-black my-2 rounded-xl">
+        <h3>Owner</h3>
+        <div class="flex">
+          <img class="inline object-cover w-8 h-8 mr-2 rounded-full" src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Profile image"/>
+          <p><%= @project.user.first_name %> <%= @project.user.last_name %></p>
+        </div>
+      </div>
 
-<h3>Details</h3>
-<p><%= @project.details %></p>
-
-<h3>Status</h3>
-<p><%= @project.status %></p>
-
-<h3>Project Updates</h3>
-<p><%= @project.project_updates.count %></p>
-
-<h3>Collaborators (<%= @project.collaborations.count %>)</h3>
-<% @project.collaborations.each do |c| %>
-  <p>Name: <%= c.user.first_name %> Status: <%= c.status %></p>
-<% end %>
+      <div class="px-2 border-2 border-black my-2 rounded-xl">
+        <h3>Collaborators (<%= @project.collaborations.count %>)</h3>
+        <% @project.collaborations.each do |c| %>
+          <div class="flex">
+            <img class="inline object-cover w-8 h-8 mr-2 rounded-full" src="https://images.pexels.com/photos/2955305/pexels-photo-2955305.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Profile image"/>
+            <p>Name: <%= c.user.first_name %> Status: <%= c.status %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

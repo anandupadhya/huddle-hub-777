@@ -37,7 +37,7 @@ end
   name = Faker::Lorem.sentence(word_count: 3).downcase
   description = Faker::Lorem.sentence
   details = Faker::Lorem.question(word_count: 50)
-  status = "Open"
+  status = "open"
   user = User.all.sample
   category = Category.all.sample
   p Project.create(name: name, description: description, details: details, status: status, user: user, category: category)
