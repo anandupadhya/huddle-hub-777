@@ -4,6 +4,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.association :category %>
     <%= f.input :name,
                 required: true,
                 autofocus: true,

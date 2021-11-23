@@ -17,12 +17,13 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @categories = Category.all
   end
 
   def create
     # @projects = Project.all
     @project = Project.new(project_params)
-    @project.category = Category.all.sample
+    # @project.category = Category.all.sample
     @project.user  = current_user
     if @project.save
       redirect_to project_path(@project)
@@ -41,6 +42,6 @@ class ProjectsController < ApplicationController
 
   private
     def project_params
-      params.require(:project).permit(:name, :description, :details, :status, :user, :category)
+      params.require(:project).permit(:name, :description, :details, :status, :user, :category_id)
     end
 end
