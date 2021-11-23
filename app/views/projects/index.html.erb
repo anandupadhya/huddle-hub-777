@@ -2,23 +2,33 @@
 <%# Use "project" as variable name when iterating over the array %>
 <%# Each project has: name, description, details, status,  user (the owner), users (the collaborators, an array)  %>
 
+<div class="nav container-none flex-col p-4 shadow">
+  <div class="nav-main flex justify-between">
+    <div class="brand">
+      <h1>Huddle Hub</h1>
+    </div>
 
-<h1>Huddle Hub</h1>
+    <div class="session container-none flex">
+      <% if user_signed_in? %>
+        <%= link_to 'New Project', new_project_path %>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: { confirm: "You really want to sign out?" } %>
+        <p><%= current_user.username %></p>
+      <% else %>
+        <p><%= link_to 'Sign In', new_user_session_path %></p>
+        <p><%= link_to 'Sign Up', new_user_registration_path %></p>
+      <% end %>
+    </div>
+  </div>
 
-<% if user_signed_in? %>
-  <p>Signed in as: <%= current_user.username %></p>
-  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: { confirm: "You really want to sign out?" } %>
-<% else %>
-  <p><%= link_to 'Sign In', new_user_session_path %></p>
-  <p><%= link_to 'Sign Up', new_user_registration_path %></p>
-<% end %>
+  <div class="container-none flex justify-between">
+  <%= link_to 'All', projects_path %>
+    <% @categories.each do |category| %>
+      <%= link_to category.name, projects_path(category: category.id) %>
+    <% end %>
+  </div>
+</div>
 
-<ul class="pb-3 flex items-center justify-center space-x-6 shadow-sm">
-  <button>Graphics & Design</button>
-  <button>Digital Marketing</button>
-  <button>Music & Audio</button>
-  <button>Programming & Tech</button>
-</ul>
+
 <div class="flex justify-between max-w-max gap-y-10 flex-wrap">
   <% @projects.each do |project| %>
     <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -26,12 +36,15 @@
         <div class="Project justify-center pb-3 font-bold"><%= project.name %></div>
         <p class="text-gray-700 text-base">
           <%= project.description %>
+          <p>Status: <%= project.status %></p>
         </p>
+        <p>Owner: <%= project.user.first_name %> <%= project.user.last_name[0] %>.</p>
       </div>
-      <div class="px-6 pt-4 pb-2">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= project.status %></span>
-          <ul class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          <button>Join</button>
+      <div class="flex justify-between px-6 pt-4 pb-2">
+        <p><%= link_to 'Details', project_path(project) %></p>
+        <% if user_signed_in? %>
+          <p>Join</p>
+        <% end %>
       </div>
     </div>
   <% end %>
