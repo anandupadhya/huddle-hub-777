@@ -15,13 +15,14 @@
           <p class="text-gray-500"> Status: <%= project.status %></p>
         </p>
         <p class="text-gray-500">Owner: <%= project.user.first_name %> <%= project.user.last_name[0] %>.</p>
-      </div>
-      <div class="flex justify-between px-6 pt-4 pb-2">
+        <div class="flex justify-between px-6 pt-4 pb-2">
         <p><%= link_to 'Details', project_path(project) %></p>
         <% if user_signed_in? %>
           <p>Join</p>
         <% end %>
       </div>
+      </div>
+
     </div>
   <% end %>
 
