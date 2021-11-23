@@ -20,13 +20,17 @@ class ProfilesController < ApplicationController
   end
 
   def update
-
+    if @profile.update(profile_params)
+      redirect_to profile_path(@profile)
+    else
+      render 'edit'
+    end
   end
 
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :description, :details, :status, :user, :category_id)
+    params.require(:profile).permit(:photo)
   end
 
   def set_profile

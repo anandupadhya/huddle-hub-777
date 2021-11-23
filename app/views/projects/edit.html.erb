@@ -1,1 +1,28 @@
 <h1>Edit Project</h1>
+
+<%= simple_form_for(@project) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :category %>
+    <%#= f.input :status, collection: @statuses %>
+    <%= f.input :name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "name" }%>
+    <%= f.input :description,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "description" }%>
+    <%= f.input :details,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "details" }%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update" %>
+  </div>
+<% end %>
+
+<%= link_to 'Cancel', projects_path %>

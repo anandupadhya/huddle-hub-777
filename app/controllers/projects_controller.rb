@@ -40,6 +40,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit
+    @categories = Category.all
+  end
+
+  def update
+    if @project.update(project_params)
+      redirect_to project_path(@project)
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @project.destroy
     redirect_to projects_path
