@@ -1,4 +1,4 @@
-<h1 class="text-center">Huddle-Hub</h1>
+<h1 class="text-center pb-4">Huddle-Hub</h1>
 
 <ul class="pb-3 flex items-center justify-center space-x-6 shadow-sm">
   <button>Graphics & Design</button>
@@ -6,9 +6,12 @@
   <button>Music & Audio</button>
   <button>Programming & Tech</button>
 </ul>
-<div class="flex justify-between max-w-max gap-y-10 flex-wrap">
+
+
+
+<div class="gap-y-10 px-5 py-3 grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-1 gap-8 md:grid-cols-2 auto-cols-max items-stretch">
   <% 30.times do %>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="text-white max-w-sm rounded overflow-hidden shadow-lg projectcard">
       <div class="px-6 py-4">
         <div class="Project justify-center pb-3 font-bold">Project 1</div>
         <p class="text-gray-700 text-base">
@@ -22,5 +25,9 @@
       </div>
     </div>
   <% end %>
+</div>
 
+<div class="container mx-auto">
+  <h1>Project Name</h1>
+  <p>Description</p>
 </div>
