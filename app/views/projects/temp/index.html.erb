@@ -1,0 +1,28 @@
+<%# Available instance variables: @projects (an array or Project) %>
+<%# Use "project" as variable name when iterating over the array %>
+<%# Each project has: name, description, details, status,  user (the owner), users (the collaborators, an array)  %>
+
+
+
+
+<div class="flex justify-between max-w-max gap-y-10 flex-wrap">
+  <% @projects.each do |project| %>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+      <div class="px-6 py-4">
+        <div class="Project justify-center pb-3 font-bold"><%= project.name %></div>
+        <p class="text-gray-700 text-base">
+          <%= project.description %>
+          <p>Status: <%= project.status %></p>
+        </p>
+        <p>Owner: <%= project.user.first_name %> <%= project.user.last_name[0] %>.</p>
+      </div>
+      <div class="flex justify-between px-6 pt-4 pb-2">
+        <p><%= link_to 'Details', project_path(project) %></p>
+        <% if user_signed_in? %>
+          <p>Join</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
