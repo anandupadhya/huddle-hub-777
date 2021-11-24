@@ -3,27 +3,21 @@
 <%# Each project has: name, description, details, status,  user (the owner), users (the collaborators, an array)  %>
 
 
-
-
-<div class="text-white gap-y-10 px-5 py-3 grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-1 gap-8 md:grid-cols-2 auto-cols-max items-stretch">
+<div class="max-w-screen-xl mx-auto px-8 pt-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
   <% @projects.each do |project| %>
-    <div class="bg-white projectcard max-w-sm rounded overflow-hidden shadow-lg ">
-      <div class="px-6 py-4 text-gray-700">
-        <div class="project.name justify-center pb-3 font-bold"><%=  %></div>
-        <p class=text-gray-400>
-          <%= project.description %>
-          <p class="text-gray-500"> Status: <%= project.status %></p>
-        </p>
-        <p class="text-gray-500">Owner: <%= project.user.first_name %> <%= project.user.last_name[0] %>.</p>
-        <div class="flex justify-between px-6 pt-4 pb-2">
-        <p><%= link_to 'Details', project_path(project) %></p>
+    <div class="card-project group px-4 py-4 rounded-md bg-gray-100 transition duration-100 shadow-sm hover:shadow-lg flex flex-col justify-between">
+      <div class="info">
+        <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
+        <p class="text-gray-400 text-lg"><%= project.description %></p>
+        <p><span class="font-bold">Status: </span><%= project.status %></p>
+        <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
+      </div>
+      <div class="action flex justify-between items-end">
+        <%= link_to 'Details', project_path(project), class: "underline text-md" %>
         <% if user_signed_in? %>
-          <p>Join</p>
+            <%= link_to 'Join', projects_path, class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
         <% end %>
       </div>
-      </div>
-
     </div>
   <% end %>
-
 </div>
