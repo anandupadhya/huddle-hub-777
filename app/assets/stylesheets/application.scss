@@ -19,7 +19,7 @@
 
 .navbar {
   background-color: #1a2639;
-  position: fixed;
+  // position: fixed;
   width: 100%;
   font-family: 'Nunito', sans-serif;
 }
@@ -31,4 +31,9 @@
 .logo-text {
   font-family: 'Varela Round', sans-serif;;
   color: #c24d2c;
+}
+
+
+.card-project {
+  height: 275px;
 }

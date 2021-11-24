@@ -1,46 +1,52 @@
 <nav class="navbar shadow-xl">
-  <div class="max-w-full mx-auto px-8 pt-4 pb-2">
+  <div class="max-w-full mx-auto px-4 md:px-8 md:pt-4 pb-2">
     <div class="flex justify-between">
 
       <div class="flex space-x-4">
         <!-- logo -->
         <div>
           <a href="#" class="flex items-center py-4 hover:text-gray-900">
-            <i class="fab fa-hubspot text-5xl text-yellow-300"></i>
-            <span class="logo-text font-bold text-5xl pl-4">HuddleHub</span>
+            <i class="fab fa-hubspot text-3xl md:text-5xl text-yellow-300"></i>
+            <span class="logo-text font-bold text-3xl md:text-5xl pl-4">HuddleHub</span>
           </a>
         </div>
       </div>
 
-      <!-- secondary nav -->
-      <div class="hidden md:flex items-center space-x-4">
-        <a href="" class="nav-link text-lg hover:text-yellow-300 py-5 px-3">Login</a>
-        <a href="" class="text-lg py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Signup</a>
+      <!-- new project, login, sign up, profile -->
+      <div class="hidden md:flex items-center justify-between space-x-2">
+        <% if user_signed_in? %>
+          <%= link_to 'New Project', new_project_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3" %>
+          <%= link_to 'Sign Out', destroy_user_session_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3", method: :delete, data: { confirm: "You really want to sign out?",  } %>
+          <%= link_to current_user.first_name, projects_path, class: "text-lg py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+        <% else %>
+          <%= link_to 'Login', new_user_session_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3" %>
+          <%= link_to 'Sign Up', new_user_registration_path, class: "text-lg py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+        <% end %>
       </div>
 
-      <!-- mobile button goes here -->
+      <!-- hamburger button for mobile -->
       <div class="md:hidden flex items-center">
         <button class="mobile-menu-button">
-          <i class="fas fa-bars text-3xl text-yellow-300"></i>
+          <i class="fas fa-bars text-2xl text-yellow-300 hover:text-yellow-400"></i>
         </button>
       </div>
 
     </div>
 
-    <!--     category nav -->
+    <!-- categories bar NON-MOBILE -->
     <div class="hidden max-w-full mx-auto md:flex md:flex-wrap md:justify-center">
-      <%= link_to 'All', projects_path, class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300"%>
+      <%= link_to 'All', projects_path, class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300 hover:font-bolder"%>
       <% Category.all.each do |category| %>
-        <%= link_to category.name, projects_path(category: category.id), class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300" %>
+        <%= link_to category.name, projects_path(category: category.id), class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300 hover:font-bolder" %>
       <% end %>
     </div>
   </div>
 
-  <!-- mobile menu -->
+  <!-- categories bar MOBILE -->
   <div class="mobile-menu md:hidden pb-2">
-    <%= link_to 'All', projects_path, class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200" %>
+    <%= link_to 'All', projects_path, class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
     <% Category.all.each do |category| %>
-      <%= link_to category.name, projects_path(category: category.id), class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200" %>
+      <%= link_to category.name, projects_path(category: category.id), class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
     <% end %>
   </div>
 </nav>
