@@ -1,3 +1,45 @@
+<div class="grid max-w-screen-xl mx-auto px-4 py-4 grid-cols-1 lg:grid-cols-3 gap-4">
+  <%# PROJECT INFO %>
+  <div class="lg:col-span-2">
+    <p class="pb-1 text-gray-400"><%= @project.category.name %></p>
+    <div class="pb-2 mb-2 border-b-2 border-gray-400 text-4xl font-bold">
+      <%= @project.name.upcase %>
+      <% if policy(@project).edit? %>
+        <%= link_to edit_project_path(@project) do %>
+          <i class="fas fa-pen text-lg text-gray-400"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="bg-blue-200 p-2 mb-2">
+      <p>Project Description</p>
+      <p><%= @project.description %></p>
+    </div>
+    <div class="bg-blue-200 p-2 mb-2">
+      <p>Project Details</p>
+      <p><%= @project.details %></p></div>
+    <div class="bg-blue-200 p-2 mb-2">Project Updates</div>
+  </div>
+
+  <%# COLLABORATORS INFO %>
+  <div class="lg:col-span-1">
+    <p class="mb-2 text-1xl font-bold">Project Owner</p>
+    <div class="bg-gray-200 p-2 mb-6 rounded-lg">
+      <p>Anand Upadhya</p>
+    </div>
+    <p class="mb-2 text-1xl font-bold">Project Collaborators (<%= @project.collaborations.count %>)</p>
+    <div class="bg-gray-200 p-2 mb-2 rounded-lg">
+      <% @project.collaborations.each do |c| %>
+        <p>Image <%= c.user.first_name %> Status: <%= c.status %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <h1><%= @project.name %></h1>
 <% if policy(@project).edit? %>
   <%= link_to "Edit", edit_project_path(@project) %>
