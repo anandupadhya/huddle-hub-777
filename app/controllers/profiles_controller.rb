@@ -8,7 +8,11 @@ class ProfilesController < ApplicationController
   end
 
   def show
-
+    @location =
+      [{
+        lat: @profile.latitude,
+        lng: @profile.longitude
+      }]
   end
 
   def destroy
@@ -30,7 +34,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:photo)
+    params.require(:profile).permit(:photo, :address)
   end
 
   def set_profile
