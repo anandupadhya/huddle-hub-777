@@ -13,7 +13,7 @@
       </div>
 
       <!-- new project, login, sign up, profile -->
-      <div class="hidden md:flex items-center justify-between space-x-2">
+      <div class="hidden md:flex lg:hidden xl:flex items-center justify-between space-x-2">
         <% if user_signed_in? %>
           <%= link_to 'New Project', new_project_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3" %>
           <%= link_to 'Sign Out', destroy_user_session_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3", method: :delete, data: { confirm: "You really want to sign out?",  } %>
