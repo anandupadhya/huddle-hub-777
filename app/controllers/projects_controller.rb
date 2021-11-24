@@ -1,15 +1,17 @@
 class ProjectsController < ApplicationController
+  before_action :set_project, only: %i[show destroy edit update] # Need to add edit and update
+
   def index
-    @projects = Project.all
+    @projects = policy_scope(Project)
     # @categories = Category.all
     if params[:category]
       p category = params[:category].to_i
       p @projects = @projects.select { |project| project.category_id == category }
     end
+
   end
 
   def show
-    @project = Project.find(params[:id])
     # @bookmark = Bookmark.new
     # @bookmark.list = @list
     # @movies = Movie.all
@@ -17,13 +19,18 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @categories = Category.all
+    # @statuses = ['open', 'closed', 'completed']
+    authorize @project
   end
 
   def create
     # @projects = Project.all
     @project = Project.new(project_params)
-    @project.category = Category.all.sample
-    @project.user  = current_user
+    @project.user = current_user
+    @project.status = 'open'
+    authorize @project
+
     if @project.save
       redirect_to project_path(@project)
     else
@@ -33,14 +40,31 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit
+    @categories = Category.all
+  end
+
+  def update
+    if @project.update(project_params)
+      redirect_to project_path(@project)
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path
   end
 
   private
-    def project_params
-      params.require(:project).permit(:name, :description, :details, :status, :user, :category)
-    end
+
+  def project_params
+    params.require(:project).permit(:name, :description, :details, :status, :user, :category_id)
+  end
+
+  def set_project
+    @project = Project.find(params[:id])
+    authorize @project
+  end
 end

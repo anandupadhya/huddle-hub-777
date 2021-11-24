@@ -1,6 +1,10 @@
-<div class="container px-0 w-auto mt-2">
-  <div class="container flex">
-    <div class= "container bg-pink-100 border-2 border-black shadow-xl rounded-md">
+<h1><%= @project.name %></h1>
+<% if policy(@project).edit? %>
+  <%= link_to "Edit", edit_project_path(@project) %>
+<% end %>
+
+<h3>Category</h3>
+<p><%= @project.category.name %></p>
 
       <h1 class="px-2 border-2 border-black my-2 rounded-xl"><%= @project.name %></h1>
       <div class="px-2 border-2 border-black my-2 rounded-xl">

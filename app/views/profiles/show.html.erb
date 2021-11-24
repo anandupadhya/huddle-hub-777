@@ -1,0 +1,10 @@
+<% if @profile.photo.attached? %>
+  <%= cl_image_tag @profile.photo.key %>
+<% end %>
+
+
+<h3>Name: <%= @profile.user.first_name %> <%= @profile.user.last_name %></h3>
+<h3>Username: <%= @profile.user.username %> </h3>
+<h3>Email: <%= @profile.user.email %> </h3>
+
+<%= link_to "Add Picture", edit_profile_path(@profile)%>

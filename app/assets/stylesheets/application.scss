@@ -2,12 +2,38 @@
 @import "config/fonts";
 @import "config/colors";
 @import "config/bootstrap_variables";
+@import "config/common";
 
 // External libraries
-@import "bootstrap/scss/bootstrap";
+// @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
 // Your CSS partials
 @import "components/index";
-@import "pages/index";
+// @import "pages/index";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Varela+Round&display=swap');
+
+.navbar {
+  background-color: #1a2639;
+  // position: fixed;
+  width: 100%;
+  font-family: 'Nunito', sans-serif;
+}
+
+.nav-link {
+  color: whitesmoke;
+}
+
+.logo-text {
+  font-family: 'Varela Round', sans-serif;;
+  color: #c24d2c;
+}
+
+
+.card-project {
+  height: 275px;
+}
