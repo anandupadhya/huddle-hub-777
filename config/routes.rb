@@ -8,4 +8,5 @@ Rails.application.routes.draw do
     resources :project_updates, only: [:new, :create]
   end
   resources :collaborations, only: [:destroy]
+  resources :profiles, only: [:show, :create, :edit, :update, :destroy]
 end
