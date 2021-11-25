@@ -43,7 +43,7 @@
   </div>
 
   <!-- categories bar MOBILE -->
-  <div class="mobile-menu md:hidden pb-2">
+  <div class="mobile-menu hidden md:hidden pb-2">
     <%= link_to 'All', projects_path, class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
     <% Category.all.each do |category| %>
       <%= link_to category.name, projects_path(category: category.id), class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
