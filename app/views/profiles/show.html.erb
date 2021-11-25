@@ -14,7 +14,7 @@
         <% if @profile.photo.attached? %>
           <%= cl_image_tag @profile.photo.key, width: 300, height: 300, gravity: :face, class: "profile-img p-0 rounded-lg" %>
         <% else %>
-          <%= image_tag "dummy-profile-pic", width: 300, height: 300, class: "profile-img p-0 rounded-lg" %>
+          <%= image_tag "dummy-profile-pic.png", width: 300, height: 300, class: "profile-img p-0 rounded-lg" %>
         <% end %>
         <div>
           <p class="text-base p-2 mt-2"><strong>Email: <br></strong><%= @profile.user.email %></p>
