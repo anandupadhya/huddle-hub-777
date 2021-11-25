@@ -29,8 +29,8 @@
 #   email = Faker::Internet.email
 #   username = Faker::Internet.username
 #   password = Faker::Internet.password
-#   p User.create!(first_name: first_name, last_name: last_name, email: email, username: username, password: password)
-# end
+# #   p User.create!(first_name: first_name, last_name: last_name, email: email, username: username, password: password)
+# # end
 
 first category_Graphic & Design
 20.times do
@@ -76,8 +76,8 @@ first category_Graphic & Design
   p description = "#{bookname.sample} #{description.sample} to meet your needs in writing"
 
   fourth category_Video & Animation
-  # 20.times do
-  # p name = Faker::Lorem.sentence(word_count: 3).downcase
+#   # 20.times do
+#   # p name = Faker::Lorem.sentence(word_count: 3).downcase
 
 
   productname = [Faker::Music.album, Faker::Movie.title,Faker::Artist.name]
@@ -90,23 +90,53 @@ first category_Graphic & Design
   description = ['provides you with coolest visual effects for your needs ', ' advancing your video features', 'promotional video & Animation for coporate and starups', 'create amazing ads for your business through commercial videos and animations']
   p description = "#{productname.sample} #{description.sample} to meet your needs in developing your business
 
-  # brand = Faker::App.name
-  # description = ['uses brand materials', 'creates unique visual experience for clients', 'add key features']
-  # p description = "#{brand} #{description.sample} sign up for collabration"
+  Catrgoty Business
 
-  # p details = Faker::Lorem.question(word_count: 50)
-  # p status = "Open"
-  # user = User.all.sample
-  # category = Category.all.sample
+  # 20.times do
+  # p name = Faker::Lorem.sentence(word_count: 3).downcase
 
-  # p Project.create!(name: name, description: description, details: details, status: status, user: user, category: category)
+  businessname = [Faker::Company.industry, Faker::Company.name,Faker::Commerce.department]
+  products = ['Event Planning', 'Management system installation', 'Pitch Drafting', 'IT Supports']
+  p name = "#{businessname.sample} #{products.sample}"
+
+#   # # p description = Faker::Lorem.sentence
+
+  businessname = [Faker::Company.industry, Faker::Company.name,Faker::Commerce.department]
+  description = ['monitor and maintain the computer systems and networks of your organisation', 'have solid track record of delivering projects that have had proven business benefits', 'utilise business techniques to back up your business.
+ ']
+  p description = "#{businessname.sample} #{description.sample} to meet your needs in developing your business"
+
+ Catrgoty Data
+#   # 20.times do
+#   # p name = Faker::Lorem.sentence(word_count: 3).downcase
+
+  businessname = [Faker::Company.industry, Faker::Company.name,Faker::Commerce.department]
+  products = ['Data Management', 'Data Analysis system', 'Data Decision Making Tool', 'Data Storage']
+  p name = "#{businessname.sample} #{products.sample}"
+
+#   # # p description = Faker::Lorem.sentence
+
+  businessname = [Faker::Company.industry, Faker::Company.name,Faker::Commerce.department]
+  description = ['utilise your data into your business planning', 'Conduct data analysis reporting, internal data pattern','monitoring and forecasting business activities by leveraging your data']
+  p description = "#{businessname.sample} #{description.sample} to improve the performance of your business where needed"
 end
+#   # brand = Faker::App.name
+#   # description = ['uses brand materials', 'creates unique visual experience for clients', 'add key features']
+#   # p description = "#{brand} #{description.sample} sign up for collabration"
 
-# # create! collaborations
-# Project.all.each do |project|
-#   rand(1..15).times do
-#     user = User.all.sample
-#     while user == project.user do
+#   # p details = Faker::Lorem.question(word_count: 50)
+#   # p status = "Open"
+#   # user = User.all.sample
+#   # category = Category.all.sample
+
+#   # p Project.create!(name: name, description: description, details: details, status: status, user: user, category: category)
+
+
+# # # create! collaborations
+# # Project.all.each do |project|
+# #   rand(1..15).times do
+# #     user = User.all.sample
+# #     while user == project.user do
 #       user = User.all.sample
 #     end
 #     p Collaboration.create!(user: user, project: project, status: "accepted")
