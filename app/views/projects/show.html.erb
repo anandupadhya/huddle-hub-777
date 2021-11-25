@@ -1,8 +1,42 @@
-<h1><%= @project.name %></h1>
-<% if policy(@project).edit? %>
-  <%= link_to "Edit", edit_project_path(@project) %>
-<% end %>
+<div class="grid max-w-screen-xl mx-auto px-4 py-4 grid-cols-1 lg:grid-cols-3 gap-8">
+  <%# PROJECT INFO %>
+  <div class="lg:col-span-2">
+    <p class="pb-1 text-gray-400"><%= @project.category.name %></p>
+    <div class="pb-2 mb-6 border-b-2 border-gray-400 text-4xl font-bold">
+      <%= @project.name.upcase %>
+      <% if policy(@project).edit? %>
+        <%= link_to edit_project_path(@project) do %>
+          <i class="fas fa-pen text-lg text-gray-400"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="map w-full h-96 mb-6 bg-blue-100 rounded-lg flex justify-center items-center">
+      map
+    </div>
+    <div class="mb-4">
+      <p class="text-md text-gray-600 font-bold">Project Description</p>
+      <p><%= @project.description %></p>
+    </div>
+    <div class="mb-4">
+      <p class="text-md text-gray-600 font-bold">Project Details</p>
+      <p><%= @project.details %></p>
+    </div>
+    <div class="mb-4">
+      <p class="text-md text-gray-600 font-bold">Project Updates</p>
+      <p>System - Nov 24, 2021 14:39</p>
+      <p>Project created</p>
+      <p>System - Nov 24, 2021 14:39</p>
+      <p>Project created</p>
+      <p>System - Nov 24, 2021 14:39</p>
+      <p>Project created</p>
+      <p>System - Nov 24, 2021 14:39</p>
+      <p>Project created</p>
+      <p>System - Nov 24, 2021 14:39</p>
+      <p>Project created</p>
+    </div>
+  </div>
 
+<<<<<<< HEAD
 <h3>Category</h3>
 <p><%= @project.category.name %></p>
 
@@ -43,6 +77,28 @@
           </div>
         <% end %>
       </div>
+=======
+  <%# COLLABORATORS INFO %>
+  <div class="lg:col-span-1">
+    <p class="mb-2 text-1xl font-bold">Project Owner</p>
+    <div class="bg-gray-200 p-4 mb-6 rounded-lg flex space-x-4 items-center">
+      <div class="profile-img w-36 h-36 p-0 bg-red-300 rounded-lg flex flex-shrink-0 justify-center items-center text-center">
+        Image
+      </div>
+      <p class="text-2xl"><%= @project.user.first_name %> <%= @project.user.last_name %></p>
+    </div>
+    <p class="mb-2 text-1xl font-bold">Project Collaborators (<%= @project.collaborations.count %>)</p>
+    <div class="bg-gray-200 p-4 mb-2 rounded-lg">
+      <% @project.collaborations.each do |c| %>
+        <div class="bg-gray-200 p-0 mb-2 rounded-lg flex space-x-4 items-center">
+          <div class="profile-img w-20 h-20 p-0 bg-red-300 rounded-lg flex flex-shrink-0 justify-center items-center text-center">
+            Image
+          </div>
+          <p class=""><%= c.user.first_name %> <%= c.user.last_name %></p>
+          <%= c.status %>
+        </div>
+      <% end %>
+>>>>>>> 8a43cb2bc1ea9568620810607d70038213dceb48
     </div>
   </div>
 </div>

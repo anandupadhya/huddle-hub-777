@@ -13,11 +13,17 @@
       </div>
 
       <!-- new project, login, sign up, profile -->
-      <div class="hidden md:flex items-center justify-between space-x-2">
+      <div class="hidden md:flex lg:hidden xl:flex items-center justify-between space-x-2">
         <% if user_signed_in? %>
+<<<<<<< HEAD
           <%= link_to 'New Project', new_project_path, class: "nav-link md-text-md lg:text-lg hover:text-yellow-300 py-5 px-3" %>
           <%= link_to 'Sign Out', destroy_user_session_path, class: "nav-link md-text-md lg:text-lg hover:text-yellow-300 py-5 px-3", method: :delete, data: { confirm: "You really want to sign out?",  } %>
           <%= link_to current_user.first_name, projects_path, class: "md-text-md lg:text-lg py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+=======
+          <%= link_to 'New Project', new_project_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3" %>
+          <%= link_to 'Sign Out', destroy_user_session_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3", method: :delete, data: { confirm: "You really want to sign out?",  } %>
+          <%= link_to current_user.first_name, profile_path(current_user.profile), class: "text-lg py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+>>>>>>> 8a43cb2bc1ea9568620810607d70038213dceb48
         <% else %>
           <%= link_to 'Login', new_user_session_path, class: "nav-link md-text-md lg:text-lg hover:text-yellow-300 py-5 px-3" %>
           <%= link_to 'Sign Up', new_user_registration_path, class: "md-text-md lg:text-lg py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>

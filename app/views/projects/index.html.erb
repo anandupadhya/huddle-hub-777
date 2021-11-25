@@ -7,6 +7,7 @@
   <% @projects.each do |project| %>
     <div class="card-project group px-4 py-4 rounded-md bg-gray-100 transition duration-100 shadow-sm hover:shadow-lg flex flex-col justify-between">
       <div class="info">
+<<<<<<< HEAD
         <div>
           <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
           <p class="text-gray-400 text-lg"><%= project.description %></p>
@@ -16,6 +17,21 @@
           <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
         </div>
       </div>
+=======
+        <div class="top-part">
+          <div class='title'>
+            <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
+          </div>
+          <div>
+            <p class="text-gray-400 text-lg"><%= project.description %></p>
+          </div>
+        </div>
+        <div class="Mid_part">
+          <p><span class="font-bold">Status: </span><%= project.status %></p>
+          <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
+        </div>
+    </div>
+>>>>>>> 8a43cb2bc1ea9568620810607d70038213dceb48
       <div class="action flex justify-between items-end">
         <%= link_to 'Details', project_path(project), class: "underline text-md" %>
         <% if user_signed_in? %>
