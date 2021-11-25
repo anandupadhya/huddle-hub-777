@@ -10,8 +10,11 @@
         <% end %>
       <% end %>
     </div>
-    <div class="map w-full h-96 mb-6 bg-blue-100 rounded-lg flex justify-center items-center">
-      map
+    <div id="map" style="height: 300px;"
+     data-markers="<%= @location.to_json %>"
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+     class="map w-full h-96 mb-6 bg-blue-100 rounded-lg
+            flex justify-center items-center">
     </div>
     <div class="mb-4">
       <p class="text-md text-gray-600 font-bold">Project Description</p>
@@ -41,7 +44,9 @@
     <p class="mb-2 text-1xl font-bold">Project Owner</p>
     <div class="bg-gray-200 p-4 mb-6 rounded-lg flex space-x-4 items-center">
       <div class="profile-img w-36 h-36 p-0 bg-red-300 rounded-lg flex flex-shrink-0 justify-center items-center text-center">
-        Image
+        <% if @project.user.profile.photo.attached? %>
+          <%= cl_image_tag @project.user.profile.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "profile-img w-36 h-36 p-0 bg-red-300 rounded-lg flex flex-shrink-0 justify-center items-center text-cente" %>
+        <% end %>
       </div>
       <p class="text-2xl"><%= @project.user.first_name %> <%= @project.user.last_name %></p>
     </div>
