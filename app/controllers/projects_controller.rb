@@ -15,6 +15,11 @@ class ProjectsController < ApplicationController
     # @bookmark = Bookmark.new
     # @bookmark.list = @list
     # @movies = Movie.all
+    @location =
+      [{
+        lat: @project.user.profile.latitude,
+        lng: @project.user.profile.longitude
+      }]
   end
 
   def new
