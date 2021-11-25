@@ -13,7 +13,7 @@
       </div>
 
       <!-- new project, login, sign up, profile -->
-      <div class="hidden md:flex lg:hidden xl:flex items-center justify-between space-x-2">
+      <div class="hidden md:flex items-center justify-between space-x-2">
         <% if user_signed_in? %>
           <%= link_to 'New Project', new_project_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3" %>
           <%= link_to 'Sign Out', destroy_user_session_path, class: "nav-link text-lg hover:text-yellow-300 py-5 px-3", method: :delete, data: { confirm: "You really want to sign out?",  } %>
@@ -37,16 +37,16 @@
     <div class="hidden max-w-full mx-auto md:flex md:flex-wrap md:justify-center">
       <%= link_to 'All', projects_path, class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300 hover:font-bolder"%>
       <% Category.all.each do |category| %>
-        <%= link_to category.name, projects_path(category: category.id), class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 hover:text-yellow-300 hover:font-bolder" %>
+        <%= link_to category.name, projects_path(category: category.id), class: "nav-link py-3 px-3 text-gray-700 flex-shrink-0 tracking-tight hover:text-yellow-300 hover:font-bolder" %>
       <% end %>
     </div>
   </div>
 
   <!-- categories bar MOBILE -->
   <div class="mobile-menu hidden md:hidden pb-2">
-    <%= link_to 'All', projects_path, class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
+    <%= link_to 'All', projects_path, class: "nav-link block py-2 px-4 text-sm text-center tracking-wider hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
     <% Category.all.each do |category| %>
-      <%= link_to category.name, projects_path(category: category.id), class: "nav-link block py-2 px-4 text-sm text-center hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
+      <%= link_to category.name, projects_path(category: category.id), class: "nav-link block py-2 px-4 text-sm text-center tracking-wider hover:text-yellow-900 hover:bg-yellow-200 hover:font-bold" %>
     <% end %>
   </div>
 </nav>
