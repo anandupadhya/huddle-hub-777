@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show destroy edit update] # Need to add edit and update
 
   def index
-    @projects = policy_scope(Project)
+    @projects = policy_scope(Project).order(created_at: :desc)
     # @categories = Category.all
     if params[:category]
       p category = params[:category].to_i
