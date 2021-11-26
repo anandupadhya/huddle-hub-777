@@ -80,33 +80,35 @@
       </div>
       <p class="text-2xl text-gray"><a href="../profiles/<%= @project.user.profile.id %>"> <%= @project.user.first_name %> <%= @project.user.last_name %></a></p>
     </div>
-    <p class="text-primary-color mb-2 text-xl font-bold">Project Collaborators (<%= @collaborations.count %>)</p>
+    <p class="text-primary-color mb-2 text-xl font-bold">Project Collaborators (<%= @collaborations.where(status: ['accepted', 'pending']).count %>)</p>
     <div class="bg-gray-100 p-4 mb-2 rounded-lg">
       <% @collaborations.each do |c| %>
-        <div class="p-0 mb-3 rounded-lg flex space-x-4 items-center">
-          <div class="profile-img w-20 h-20 p-0 bg-red-300 rounded-lg flex flex-shrink-0 flex-grow-0 justify-center items-center text-center">
-            <% if c.user.profile.photo.attached? %>
-              <%= cl_image_tag c.user.profile.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "profile-img shadow-md w-20 h-20 p-0 rounded-lg flex flex-shrink-0 justify-center items-center text-cente" %>
-            <% else %>
-              <a href="../profiles/<%= c.user.profile.id %>"><%= image_tag "dummy-profile-pic.png", width: 150, height: 150, class: "profile-img shadow-md p-0 rounded-lg" %></a>
-            <% end %>
-          </div>
-          <div class="flex">
-            <div class="text-xl text-gray-600"><a href="../profiles/<%= c.user.profile.id %>"><%= c.user.first_name %> <%= c.user.last_name %><br><%= c.status.capitalize %></a></div>
-            <div class="ml-3">
-              <% if @project.user == current_user && c.status == 'pending' %>
-                <%= simple_form_for([@project, @collaboration], url: "/projects/#{@project.id}/collaborations/#{c.id}", method: :put) do |f| %>
-                  <div class="hidden"><%= f.input :status, input_html: { value: 'accepted' } %></div>
-                  <button><%= f.button :submit, "Accept", class: "cursor-pointer w-24 m-1 text-md py-1 px-6 bg-green-400 hover:bg-green-300 text-green-900 hover:text-green-800 rounded transition duration-300"%></button>
-                <% end %>
-                <%= simple_form_for([@project, @collaboration], url: "/projects/#{@project.id}/collaborations/#{c.id}", method: :put) do |f| %>
-                  <div class="hidden"><%= f.input :status, input_html: { value: 'denied' } %></div>
-                  <button><%= f.button :submit, "Deny", class: "cursor-pointer w-24 m-1 text-md py-1 px-6 bg-red-400 hover:bg-red-300 text-red-900 hover:text-red-800 rounded transition duration-300"%></button>
-                <% end %>
+        <% if c.status != 'denied' %>
+          <div class="p-0 mb-3 rounded-lg flex space-x-4 items-center">
+            <div class="profile-img w-20 h-20 p-0 bg-red-300 rounded-lg flex flex-shrink-0 flex-grow-0 justify-center items-center text-center">
+              <% if c.user.profile.photo.attached? %>
+                <%= cl_image_tag c.user.profile.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "profile-img shadow-md w-20 h-20 p-0 rounded-lg flex flex-shrink-0 justify-center items-center text-cente" %>
+              <% else %>
+                <a href="../profiles/<%= c.user.profile.id %>"><%= image_tag "dummy-profile-pic.png", width: 150, height: 150, class: "profile-img shadow-md p-0 rounded-lg" %></a>
               <% end %>
             </div>
+            <div class="flex">
+              <div class="text-xl text-gray-600"><a href="../profiles/<%= c.user.profile.id %>"><%= c.user.first_name %> <%= c.user.last_name %><br><%= c.status.capitalize %></a></div>
+              <div class="ml-3">
+                <% if @project.user == current_user && c.status == 'pending' %>
+                  <%= simple_form_for([@project, @collaboration], url: "/projects/#{@project.id}/collaborations/#{c.id}", method: :put) do |f| %>
+                    <div class="hidden"><%= f.input :status, input_html: { value: 'accepted' } %></div>
+                    <button><%= f.button :submit, "Accept", class: "cursor-pointer w-24 m-1 text-md py-1 px-6 bg-green-400 hover:bg-green-300 text-green-900 hover:text-green-800 rounded transition duration-300"%></button>
+                  <% end %>
+                  <%= simple_form_for([@project, @collaboration], url: "/projects/#{@project.id}/collaborations/#{c.id}", method: :put) do |f| %>
+                    <div class="hidden"><%= f.input :status, input_html: { value: 'denied' } %></div>
+                    <button><%= f.button :submit, "Deny", class: "cursor-pointer w-24 m-1 text-md py-1 px-6 bg-red-400 hover:bg-red-300 text-red-900 hover:text-red-800 rounded transition duration-300"%></button>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>
