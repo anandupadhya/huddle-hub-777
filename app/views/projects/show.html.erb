@@ -18,8 +18,11 @@
     </div>
     <div class="mb-4">
       <% if user_signed_in? %>
+        <%# if the current user is the project owner show post update button %>
+        <% if @project.user.id = current_user.id %>
+          <button class="text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"><%= link_to "Post Update", "/projects/#{@project.id}/project_updates/new" %></button>
         <%# if the current user is not the project owner and the user has no collabs for the project show join button %>
-        <% if @project.user.id != current_user.id && !@collaborations.exists?(['user_id = ?', current_user.id]) %>
+        <% elsif @project.user.id != current_user.id && !@collaborations.exists?(['user_id = ?', current_user.id]) %>
           <%= simple_form_for([@project, @collaboration]) do |f| %>
             <div class="hidden"><%= f.input :project_id, input_html: { value: "#{@project.id}" } %></div>
             <button><%= f.button :submit, "Ask to join!", class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"%></button>
@@ -53,9 +56,12 @@
     </div>
     <div class="mb-4">
       <p class="text-primary-color text-2xl font-bold">Project Updates</p>
-      <div class=" pl-4 mt-2 text-xl text-gray-600">
+      <div class="pl-4 mt-2 text-xl text-gray-600">
         <% @project.project_updates.each do |post| %>
-          <p><%= post.details %></p>
+          <div class="border-5">
+            <p><%= post.user.first_name %> <%= post.user.last_name %> (<%= post.created_at%>)</p>
+            <p class="ml-2"><%= post.details %></p>
+          </div>
         <% end %>
       </div>
     </div>
