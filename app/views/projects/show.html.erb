@@ -43,10 +43,6 @@
       <p class="pl-4 mt-2 text-xl text-gray-600 text-justify"><%= @project.details %></p>
     </div>
     <div class="mb-4">
-      <p class="text-md text-gray-600 font-bold">Project Updates</p>
-      <% @project.project_updates.each do |post| %>
-        <%= post.details %>
-      <% end %>
       <p class="text-primary-color text-2xl font-bold">Project Updates</p>
       <div class=" pl-4 mt-2 text-xl text-gray-600">
         <% @project.project_updates.each do |post| %>
