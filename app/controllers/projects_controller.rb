@@ -5,14 +5,23 @@ class ProjectsController < ApplicationController
     @projects = policy_scope(Project).order(created_at: :desc)
     # @categories = Category.all
     if params[:category]
-      p category = params[:category].to_i
-      p @projects = @projects.select { |project| project.category_id == category }
-    end
-
-    if user_signed_in?
-      @my_projects = @projects.select { |project| project.user.id == current_user.id }
-      # @my_collaborations
-      # @other_projects = @projects.select {}
+      category = params[:category].to_i
+      @projects = @projects.select { |project| project.category_id == category }
+      @other_projects = @projects
+      if user_signed_in?
+        @my_projects = @projects.select { |project| project.user.id == current_user.id }
+        @my_collaborations = current_user.projects.select { |project| project.category_id == category }
+        @other_projects = @projects.select { |project| !@my_projects.include? project }
+        @other_projects = @other_projects.select { |project| !@my_collaborations.include? project }
+      end
+    else
+       @other_projects = @projects
+      if user_signed_in?
+        @my_projects = @projects.select { |project| project.user.id == current_user.id }
+        @my_collaborations = current_user.projects
+        @other_projects = @projects.select { |project| !@my_projects.include? project }
+        @other_projects = @other_projects.select { |project| !@my_collaborations.include? project }
+      end
     end
   end
 
