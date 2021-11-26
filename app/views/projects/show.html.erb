@@ -18,19 +18,28 @@
     </div>
     <div class="mb-4">
       <% if user_signed_in? %>
-        <% if @project.user.id != current_user.id && !@project.collaborations.exists?(['user_id = ?', current_user.id]) %>
+        <%# if the current user is not the project owner and the user has no collabs for the project show join button %>
+        <% if @project.user.id != current_user.id && !@collaborations.exists?(['user_id = ?', current_user.id]) %>
           <%= simple_form_for([@project, @collaboration]) do |f| %>
             <div class="hidden"><%= f.input :project_id, input_html: { value: "#{@project.id}" } %></div>
             <button><%= f.button :submit, "Ask to join!", class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"%></button>
           <% end %>
+        <%# if the project is completed show completed %>
         <% elsif @project.status == "completed" %>
           <div class="text-md py-1 px-6 bg-gray-400 text-white-900 rounded transition duration-300">This project is complete.</div>
-        <% elsif @project.collaborations.exists?(['user_id = ?', current_user.id]) && @project.collaborations.exists?(['status = ?', 'pending']) %>
-          <div class="text-md py-1 px-6 bg-gray-400 text-white-900 rounded transition duration-300">Request pending.</div>
-        <% elsif (@project.collaborations.exists?(['user_id = ?', current_user.id]) && @project.collaborations.exists?(['status = ?', 'accepted'])) || @project.user == current_user%>
-          <button class="text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"><%= link_to "Post Update", "/projects/#{@project.id}/project_updates/new" %></button>
-        <% elsif @project.collaborations.exists?(['user_id = ?', current_user.id]) && @project.collaborations.exists?(['status = ?', 'denied']) %>
-          <div class="text-md py-1 px-6 bg-gray-400 text-white-900 rounded transition duration-300">Your request has been denied.</div>
+        <%# if user has collab with project and... %>
+        <% elsif @collaborations.exists?(['user_id = ?', current_user.id]) %>
+          <%# status is pending say request pending %>
+          <% collab = @collaborations.where(user: current_user)[0] %>
+          <% if collab.status == "pending" %>
+            <div class="text-md py-1 px-6 bg-gray-400 text-white-900 rounded transition duration-300">Request pending.</div>
+          <%# status is accepted show post update %>
+          <% elsif collab.status == "accepted" %>
+            <button class="text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"><%= link_to "Post Update", "/projects/#{@project.id}/project_updates/new" %></button>
+          <%# status is denied show denial %>
+          <% elsif collab.status == "denied" %>
+            <div class="text-md py-1 px-6 bg-gray-400 text-white-900 rounded transition duration-300">Your request has been denied.</div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -65,9 +74,9 @@
       </div>
       <p class="text-2xl text-gray"><%= @project.user.first_name %> <%= @project.user.last_name %></p>
     </div>
-    <p class="text-primary-color mb-2 text-xl font-bold">Project Collaborators (<%= @project.collaborations.count %>)</p>
+    <p class="text-primary-color mb-2 text-xl font-bold">Project Collaborators (<%= @collaborations.count %>)</p>
     <div class="bg-gray-100 p-4 mb-2 rounded-lg">
-      <% @project.collaborations.each do |c| %>
+      <% @collaborations.each do |c| %>
         <div class="p-0 mb-3 rounded-lg flex space-x-4 items-center">
           <div class="profile-img w-20 h-20 p-0 bg-red-300 rounded-lg flex flex-shrink-0 flex-grow-0 justify-center items-center text-center">
             <% if c.user.profile.photo.attached? %>

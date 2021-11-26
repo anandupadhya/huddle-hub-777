@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
         lng: @project.user.profile.longitude
       }]
     @collaboration = Collaboration.new
+    @collaborations = @project.collaborations
   end
 
   def new
