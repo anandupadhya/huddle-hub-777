@@ -10,15 +10,15 @@
       <% end %>
     </div>
     <div class="bg-gray-200 p-4 mb-6 rounded-lg sm:flex md:flex lg:flex space-x-4">
-      <div class="xs:flex">
+      <div>
         <% if @profile.photo.attached? %>
           <%= cl_image_tag @profile.photo.key, width: 300, height: 300, gravity: :face, class: "profile-img p-0 rounded-lg" %>
         <% else %>
           <%= image_tag "dummy-profile-pic.png", width: 300, height: 300, class: "profile-img p-0 rounded-lg" %>
         <% end %>
-        <div>
-          <p class="text-base p-2 mt-2"><strong>Email: <br></strong><%= @profile.user.email %></p>
-          <p class="text-base p-2"><strong>City: <br></strong><%= @profile.address %></p>
+        <div class="xs:flex">
+          <div class="text-base p-2 mt-1"><strong>Email: <br></strong><%= @profile.user.email %></div>
+          <div class="text-base p-2 mt-1"><strong>City: <br></strong><%= @profile.address %></div>
         </div>
       </div>
       <div class="mb-4 text-2xl container">
