@@ -25,11 +25,13 @@ class ProjectsController < ApplicationController
     @members = collabs.map do |collab|
       User.find(id = collab.user_id)
     end
-    puts @members
+
     @profiles = @members.map do |member|
       member.profile
     end
-    puts @profiles
+
+    @profiles << @project.user.profile
+
     @markers = @profiles.map do |profile|
       {
         lat: profile.latitude,
