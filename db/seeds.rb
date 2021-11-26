@@ -1,34 +1,34 @@
 # require 'faker'
 
 # # Destroy records, DO NOT change the order
-# Profile.destroy_all
-# Collaboration.destroy_all
+Profile.destroy_all
+Collaboration.destroy_all
 Project.destroy_all
 Category.destroy_all
-# User.destroy_all
+User.destroy_all
 
 # # create! users
-# count = 0
-# 50.times do
-#   first_name = Faker::Name.first_name
-#   last_name = Faker::Name.last_name
-#   email = Faker::Internet.email
-#   username = Faker::Internet.username
-#   password = "test1234"
-#   user =  User.create!(first_name: first_name, last_name: last_name, email: email, username: username, password: password)
-#   p user.profile.address = Faker::Nation.capital_city
-#   sleep 1
-#   p user.profile.save
-#   p User.find(user.id).profile
-#   count += 1
-#   if user.profile.latitude.nil?
-#     user.profile.destroy
-#     user.destroy
-#     count -= 1
-#     p "Destroyed"
-#   end
-# end
-# puts count
+count = 0
+30.times do
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  email = Faker::Internet.email
+  username = Faker::Internet.username
+  password = "test1234"
+  user =  User.create!(first_name: first_name, last_name: last_name, email: email, username: username, password: password)
+  p user.profile.address = Faker::Nation.capital_city
+  sleep 1
+  p user.profile.save
+  p User.find(user.id).profile
+  count += 1
+  if user.profile.latitude.nil?
+    user.profile.destroy
+    user.destroy
+    count -= 1
+    p "Destroyed"
+  end
+end
+puts count
 
 categories = ['Graphics & Design', 'Digital Marketing', 'Writing & Translation', 'Video & Animation',
               'Music & Audio', 'Programming & Tech', 'Data', 'Business', 'Lifestyle']
