@@ -1,12 +1,15 @@
 console.log("navbar.js loaded")
 
-// grab everything we need
-const humbrugerBtn = document.querySelector("button.mobile-menu-button");
-const mobileMenu = document.querySelector(".mobile-menu");
+const navbar = () => {
+  // grab everything we need
+  const hambrugerBtn = document.querySelector("button.mobile-menu-button");
+  // const mobileMenu = document.querySelector(".mobile-menu");
 
-// add event listeners
-humbrugerBtn.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-});
+  // add event listeners
+  hambrugerBtn.addEventListener("click", () => {
+    const mobileMenu = document.querySelector(".mobile-menu");
+    mobileMenu.classList.toggle("hidden");
+  });
+}
 
-export { humbrugerBtn };
+export { navbar };
