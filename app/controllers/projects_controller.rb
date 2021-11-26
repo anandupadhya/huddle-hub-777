@@ -15,11 +15,23 @@ class ProjectsController < ApplicationController
     # @bookmark = Bookmark.new
     # @bookmark.list = @list
     # @movies = Movie.all
-    @location =
-      [{
-        lat: @project.user.profile.latitude,
-        lng: @project.user.profile.longitude
-      }]
+
+    collabs = @project.collaborations.where(status: 'accepted')
+    @members = collabs.map do |collab|
+      User.find(id = collab.user_id)
+    end
+    puts @members
+    @profiles = @members.map do |member|
+      member.profile
+    end
+    puts @profiles
+    @markers = @profiles.map do |profile|
+      {
+        lat: profile.latitude,
+        lng: profile.longitude
+      }
+    end
+    puts @markers
     @collaboration = Collaboration.new
     @collaborations = @project.collaborations
   end
