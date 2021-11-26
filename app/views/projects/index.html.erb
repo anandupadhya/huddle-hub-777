@@ -1,62 +1,106 @@
 <%# Show only if it's the "All" page%>
-<div>My Projects <%= @my_projects.size %>
-<div class="max-w-screen-xl mx-auto p-8 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-  <% @my_projects.each do |project| %>
-    <div class="card-project group px-4 py-4 rounded-md bg-gray-100 transition duration-100 shadow-sm hover:shadow-lg flex flex-col justify-between">
-      <div class="info">
-        <div class="top-part">
-          <div class='title'>
-            <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
+<% if !@my_projects.nil? %>
+  <% if @my_projects.size > 0 %>
+    <div class="max-w-screen-xl mx-auto p-8 text-primary-color pb-2 mt-2 mb-0 text-4xl font-bold text-left">My Projects (<%= @my_projects.size %>)</div>
+    <div class="max-w-screen-xl mx-auto p-8 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <% @my_projects.each do |project| %>
+        <div>
+        <%= link_to project_path(project) do %>
+          <div class="card-project group px-4 py-4 rounded-md bg-gray-100 transition duration-100 shadow-sm hover:shadow-lg flex flex-col justify-between">
+            <div class="info">
+              <div class="top-part">
+                <div class='title'>
+                  <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
+                </div>
+                <div>
+                  <p class="text-gray-400 text-lg"><%= project.description %></p>
+                </div>
+              </div>
+              <div class="Mid_part">
+                <p><span class="font-bold">Status: </span><%= project.status %></p>
+                <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
+              </div>
           </div>
-          <div>
-            <p class="text-gray-400 text-lg"><%= project.description %></p>
+            <div class="action flex justify-between items-end">
+              <% if user_signed_in? && project.user.id != current_user.id && !project.collaborations&.exists?(['user_id = ?', current_user.id])%>
+                  <%= link_to 'Join', project_path(project), class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <div class="Mid_part">
-          <p><span class="font-bold">Status: </span><%= project.status %></p>
-          <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
-        </div>
-    </div>
-      <div class="action flex justify-between items-end">
-        <%= link_to 'Details', project_path(project), class: "underline text-md" %>
-        <% if user_signed_in? && project.user.id != current_user.id && !project.collaborations&.exists?(['user_id = ?', current_user.id])%>
-            <%= link_to 'Join', project_path(project), class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
         <% end %>
       </div>
+      <% end %>
     </div>
   <% end %>
-</div>
+<% end %>
 
-</div>
-  <%# Display grid with @my_projects %>
-<div>My Collaborations</div>
-  <%# Display grid with @my_collaborations %>
-<div>Explore</div>
-  <%# Display grid with @other_projects %>
-
-<div class="max-w-screen-xl mx-auto p-8 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-  <% @projects.each do |project| %>
-    <div class="card-project group px-4 py-4 rounded-md bg-gray-100 transition duration-100 shadow-sm hover:shadow-lg flex flex-col justify-between">
-      <div class="info">
-        <div class="top-part">
-          <div class='title'>
-            <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
+<%# Display grid with @my_projects %>
+<% if !@my_collaborations.nil? %>
+  <% if @my_collaborations.size > 0 %>
+    <div class="max-w-screen-xl mx-auto p-8 text-primary-color pb-2 mt-2 mb-0 text-4xl font-bold text-left">My Collaborations (<%= @my_collaborations.size %>)</div>
+    <div class="max-w-screen-xl mx-auto p-8 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <% @my_collaborations.each do |project| %>
+       <div>
+        <%= link_to project_path(project) do %>
+          <div class="card-project group px-4 py-4 rounded-md bg-gray-100 transition duration-100 shadow-sm hover:shadow-lg flex flex-col justify-between">
+            <div class="info">
+              <div class="top-part">
+                <div class='title'>
+                  <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
+                </div>
+                <div>
+                  <p class="text-gray-400 text-lg"><%= project.description %></p>
+                </div>
+              </div>
+              <div class="Mid_part">
+                <p><span class="font-bold">Status: </span><%= project.status %></p>
+                <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
+              </div>
           </div>
-          <div>
-            <p class="text-gray-400 text-lg"><%= project.description %></p>
+            <div class="action flex justify-between items-end">
+              <% if user_signed_in? && project.user.id != current_user.id && !project.collaborations&.exists?(['user_id = ?', current_user.id])%>
+                  <%= link_to 'Join', project_path(project), class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <div class="Mid_part">
-          <p><span class="font-bold">Status: </span><%= project.status %></p>
-          <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
-        </div>
-    </div>
-      <div class="action flex justify-between items-end">
-        <%= link_to 'Details', project_path(project), class: "underline text-md" %>
-        <% if user_signed_in? && project.user.id != current_user.id && !project.collaborations&.exists?(['user_id = ?', current_user.id])%>
-            <%= link_to 'Join', project_path(project), class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
         <% end %>
       </div>
+      <% end %>
     </div>
   <% end %>
-</div>
+<% end %>
+
+<% if !@other_projects.nil? %>
+  <% if @other_projects.size > 0 %>
+    <div class="max-w-screen-xl mx-auto p-8 text-primary-color pb-2 mt-2 mb-0 text-4xl font-bold text-left">Explore (<%= @other_projects.size %>)</div>
+    <div class="max-w-screen-xl mx-auto p-8 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <% @other_projects.each do |project| %>
+      <div>
+        <%= link_to project_path(project) do %>
+          <div class="card-project group px-4 py-4 rounded-md bg-gray-100 transition duration-100 shadow-sm hover:shadow-lg flex flex-col justify-between">
+            <div class="info">
+              <div class="top-part">
+                <div class='title'>
+                  <p class="pb-2 font-bold text-xl group-hover:text-red-700"><%= project.name.upcase %></p>
+                </div>
+                <div>
+                  <p class="text-gray-400 text-lg"><%= project.description %></p>
+                </div>
+              </div>
+              <div class="Mid_part">
+                <p><span class="font-bold">Status: </span><%= project.status %></p>
+                <p><span class="font-bold">Collaborators: </span><%= project.collaborations.count %></p>
+              </div>
+          </div>
+            <div class="action flex justify-between items-end">
+              <% if user_signed_in? && project.user.id != current_user.id && !project.collaborations&.exists?(['user_id = ?', current_user.id])%>
+                  <%= link_to 'Join', project_path(project), class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
