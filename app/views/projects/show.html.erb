@@ -67,12 +67,12 @@
     <div class="bg-gray-100 p-4 mb-6 rounded-lg flex space-x-4 items-center">
       <div class="profile-img w-36 h-36 p-0 bg-red-300 rounded-lg flex flex-shrink-0 justify-center items-center text-center">
         <% if @project.user.profile.photo.attached? %>
-          <%= cl_image_tag @project.user.profile.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "profile-img shadow-md w-36 h-36 p-0 rounded-lg flex flex-shrink-0 justify-center items-center text-cente" %>
+          <a href="../profiles/<%= @project.user.profile.id %>"><%= cl_image_tag @project.user.profile.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "profile-img shadow-md w-36 h-36 p-0 rounded-lg flex flex-shrink-0 justify-center items-center text-cente" %></a>
         <% else %>
-          <%= image_tag "dummy-profile-pic.png", width: 150, height: 150, class: "profile-img shadow-md p-0 rounded-lg" %>
+          <a href="../profiles/<%= @project.user.profile.id %>"><%= image_tag "dummy-profile-pic.png", width: 150, height: 150, class: "profile-img shadow-md p-0 rounded-lg" %></a>
         <% end %>
       </div>
-      <p class="text-2xl text-gray"><%= @project.user.first_name %> <%= @project.user.last_name %></p>
+      <p class="text-2xl text-gray"><a href="../profiles/<%= @project.user.profile.id %>"> <%= @project.user.first_name %> <%= @project.user.last_name %></a></p>
     </div>
     <p class="text-primary-color mb-2 text-xl font-bold">Project Collaborators (<%= @collaborations.count %>)</p>
     <div class="bg-gray-100 p-4 mb-2 rounded-lg">
@@ -82,11 +82,11 @@
             <% if c.user.profile.photo.attached? %>
               <%= cl_image_tag c.user.profile.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "profile-img shadow-md w-20 h-20 p-0 rounded-lg flex flex-shrink-0 justify-center items-center text-cente" %>
             <% else %>
-              <%= image_tag "dummy-profile-pic.png", width: 150, height: 150, class: "profile-img shadow-md p-0 rounded-lg" %>
+              <a href="../profiles/<%= c.user.profile.id %>"><%= image_tag "dummy-profile-pic.png", width: 150, height: 150, class: "profile-img shadow-md p-0 rounded-lg" %></a>
             <% end %>
           </div>
           <div class="flex">
-            <div class="text-xl text-gray-600"><%= c.user.first_name %> <%= c.user.last_name %><br><%= c.status %></div>
+            <div class="text-xl text-gray-600"><a href="../profiles/<%= c.user.profile.id %>"><%= c.user.first_name %> <%= c.user.last_name %><br><%= c.status %></a></div>
             <div class="ml-3">
               <% if @project.user == current_user && c.status == 'pending' %>
                 <%= simple_form_for([@project, @collaboration], url: "/projects/#{@project.id}/collaborations/#{c.id}", method: :put) do |f| %>
