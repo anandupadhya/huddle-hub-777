@@ -92,7 +92,7 @@
             <% end %>
           </div>
           <div class="flex">
-            <div class="text-xl text-gray-600"><a href="../profiles/<%= c.user.profile.id %>"><%= c.user.first_name %> <%= c.user.last_name %><br><%= c.status %></a></div>
+            <div class="text-xl text-gray-600"><a href="../profiles/<%= c.user.profile.id %>"><%= c.user.first_name %> <%= c.user.last_name %><br><%= c.status.capitalize %></a></div>
             <div class="ml-3">
               <% if @project.user == current_user && c.status == 'pending' %>
                 <%= simple_form_for([@project, @collaboration], url: "/projects/#{@project.id}/collaborations/#{c.id}", method: :put) do |f| %>
