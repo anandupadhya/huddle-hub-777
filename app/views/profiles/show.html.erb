@@ -1,7 +1,8 @@
-<div class="grid max-w-screen-xl mt-2 px-4 pt-4 grid-cols-1 lg:grid-cols-3">
+
+<div class="grid max-w-screen-xl mx-auto mt-2 px-4 pt-4 grid-cols-1 lg:grid-cols-3">
   <%# PROFILE INFO %>
   <div class="lg:col-span-2 text-4xl font-bold">
-    <div class="pb-2 mb-6 border-b-2 border-gray-400">
+    <div class="p-2 mb-6 border-b-2 border-gray-400">
       <%= @profile.user.first_name.upcase %> <%= @profile.user.last_name.upcase %>
       <% if policy(@profile).edit? %>
         <%= link_to edit_profile_path(@profile) do %>
@@ -21,9 +22,9 @@
           <div class="text-base p-2 mt-1"><strong>City: <br></strong><%= @profile.address %></div>
         </div>
       </div>
-      <div class="mb-4 text-2xl container">
+      <div class="p-2 text-2xl container">
         <p class="text-md text-gray-600 font-bold border-b-2 mt-7 mb-2">About Me</p>
-        <p class="px-5 text-xl"><%= @profile.description %></p>
+        <p class="text-xl"><%= @profile.description %></p>
       </div>
     </div>
   </div>
