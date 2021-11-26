@@ -35,18 +35,18 @@
             flex justify-center items-center">
     </div>
     <div class="mb-4">
-      <div class="bg-gray-200 p-4 mb-6 rounded-lg space-x-4">
-        <p class="text-xl text-gray-600 font-bold pb-4">My Projects</p>
+      <div class="bg-gray-200 p-4 mb-6 rounded-lg">
+        <p class="text-xl text-gray-600 font-bold pb-2">My Projects</p>
         <% @projects.each do |project| %>
-          <a href=""><p class="ml-2 text-lg font-bold"><%= project.name %><p></a>
+          <a href="../projects/<%= project.id %>"><p class="ml-2 text-lg font-bold pb-1"><%= project.name %><p></a>
         <% end %>
       </div>
     </div>
     <div class="mb-4">
-      <div class="bg-gray-200 p-4 mb-6 rounded-lg space-x-4">
-        <p class="text-xl text-gray-600 font-bold pb-4">Joined Projects</p>
+      <div class="bg-gray-200 p-4 mb-6 rounded-lg ">
+        <p class="text-xl text-gray-600 font-bold pb-2">Joined Projects</p>
         <% @my_collabs.each do |collab| %>
-          <a href=""><p class="ml-2 text-lg font-bold"><%= collab.project.name %><p><a>
+          <a href="../projects/<%= collab.project.id %>"><p class="ml-2 text-lg font-bold pb-1"><%= collab.project.name %><p><a>
         <% end %>
       </div>
     </div>
