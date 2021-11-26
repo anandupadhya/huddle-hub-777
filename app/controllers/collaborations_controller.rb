@@ -15,7 +15,7 @@ class CollaborationsController < ApplicationController
     @collaboration = Collaboration.find(params[:id])
     authorize @collaboration
     @collaboration.update(collaboration_params)
-    # redirect_to project_path(@collaboration.project_id)
+    redirect_to project_path(@collaboration.project_id)
   end
 
   private
