@@ -9,6 +9,11 @@ class ProjectsController < ApplicationController
       p @projects = @projects.select { |project| project.category_id == category }
     end
 
+    if user_signed_in?
+      @my_projects = @projects.select { |project| project.user.id == current_user.id }
+      # @my_collaborations
+      # @other_projects = @projects.select {}
+    end
   end
 
   def show
