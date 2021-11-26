@@ -22,8 +22,8 @@
     </div>
       <div class="action flex justify-between items-end">
         <%= link_to 'Details', project_path(project), class: "underline text-md" %>
-        <% if user_signed_in? %>
-            <%= link_to 'Join', projects_path, class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
+        <% if user_signed_in? && project.user.id != current_user.id %>
+            <%= link_to 'Join', project_path(project), class: "text-md py-1 px-6 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" %>
         <% end %>
       </div>
     </div>

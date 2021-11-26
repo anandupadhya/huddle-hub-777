@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
         lat: @project.user.profile.latitude,
         lng: @project.user.profile.longitude
       }]
+    @collaboration = Collaboration.new
   end
 
   def new
