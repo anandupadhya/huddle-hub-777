@@ -13,8 +13,8 @@ class ProfilesController < ApplicationController
         lat: @profile.latitude,
         lng: @profile.longitude
       }]
-    @projects = Project.where(user: current_user.id)
-    @my_collabs = Collaboration.where(user: current_user.id)
+    @projects = Project.where(user: @profile.id)
+    @my_collabs = Collaboration.where(user: @profile.id)
   end
 
   def destroy
