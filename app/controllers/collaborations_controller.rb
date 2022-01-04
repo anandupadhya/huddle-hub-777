@@ -1,21 +1,19 @@
 class CollaborationsController < ApplicationController
 
   def create
-    # @projects = Project.all
-    @collaboration = Collaboration.new(collaboration_params)
+    @collaboration = Collaboration.new
     @collaboration.user_id = current_user.id
     @collaboration.status = 'pending'
     @collaboration.user = current_user
+    @collaboration.project_id = params[:project_id]
     authorize @collaboration
     redirect_to project_path(@collaboration.project_id) if @collaboration.save
   end
 
   def update
-    puts params
-    @collaboration = Collaboration.find(params[:id])
+    @collaboration = Collaboration.find(params[:collaboration_id])
     authorize @collaboration
-    @collaboration.update(collaboration_params)
-    redirect_to project_path(@collaboration.project_id)
+    redirect_to project_path(@collaboration.project_id) if @collaboration.update(collaboration_params)
   end
 
   private
