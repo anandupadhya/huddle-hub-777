@@ -1,3 +1,3 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+view live site at https://huddle-hub-777.herokuapp.com/
 
-HuddleHub 777 Project, a marketplace project built as part of the bootcamp
+HuddleHub 777 Project, a marketplace project built as part of the Le Wagon Full-stack Web Developer Bootcamp
